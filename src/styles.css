@@ -1,4 +1,22 @@
 .App {
   font-family: sans-serif;
   text-align: center;
+  background: linear-gradient(to bottom, #063dac, #1571f3);
+  height: 100vh;
+  color: white;
+  font-size: 2rem;
+}
+* {
+  margin: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

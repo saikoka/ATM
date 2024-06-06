@@ -1,5 +1,9 @@
 import "./styles.css";
-
+import CardScreen from "./CardScreen.js";
 export default function App() {
-  return <div className="App">Bank of America ATM</div>;
+  return (
+    <div className="App">
+      <CardScreen />
+    </div>
+  );
 }
