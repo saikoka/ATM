@@ -36,3 +36,22 @@ input[type="number"] {
   width: 50%;
   height: 1.5rem;
 }
+
+.error {
+  color: red;
+}
+
+dialog::backdrop {
+  background-color: black;
+  opacity: 0.5;
+}
+
+
+dialog{
+  top: 50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
