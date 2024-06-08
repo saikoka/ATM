@@ -5,6 +5,9 @@
   height: 100vh;
   color: white;
   font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 * {
   margin: 0;
@@ -19,4 +22,17 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.bottom-spacing {
+  margin-bottom: 1rem;
+}
+
+#card-screen {
+  transform: translateY(-50%);
+}
+
+.form-sizing {
+  width: 50%;
+  height: 1.5rem;
 }
