@@ -1,2 +1,2 @@
 # ATM
-Created with CodeSandbox
+To launch app, run npm install and then npm start. 
