@@ -42,6 +42,10 @@ input {
   color: red;
 }
 
+.success{
+  color: green;
+}
+
 dialog::backdrop {
   background-color: black;
   opacity: 0.5;

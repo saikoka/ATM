@@ -1,6 +1,6 @@
 import { useContext, useState, useRef } from "react";
 import { CardContext } from "./CardContext";
-import ErrorModal from "./ErrorModal";
+import Modal from "./Modal";
 import { ScreenContext } from "./ScreenContext";
 import { REQUEST_SCREEN } from "./Statuses";
 
@@ -9,22 +9,29 @@ export default function CardScreen(props) {
   const [pin, setPin] = useState("");
   const { cardData, updateCardData } = useContext(CardContext);
   const { setPageHandler } = useContext(ScreenContext);
-  const [error, setError] = useState("");
+  const [modalMessage, setModalMessage] = useState("");
   const modal = useRef(null);
 
-  const clearError = () => {
-    setError("");
+  const handleCardNumber = (e) => {
+    if (e.target.value.length <= 16) {
+      setCardNumber(e.target.value);
+    }
+  };
+  const handleSetPin = (e) => {
+    if (e.target.value.length <= 4) {
+      setPin(e.target.value);
+    }
   };
 
   const checkCard = (e) => {
     e.preventDefault();
     if (!(cardNumber in cardData)) {
-      setError("Invalid Card Number");
+      setModalMessage("Error: Invalid Card Number");
       if (modal.current) {
         modal.current.showModal();
       }
     } else if (cardData[cardNumber].pin !== Number(pin)) {
-      setError("Invalid Pin");
+      setModalMessage("Error: Invalid Pin");
       if (modal.current) {
         modal.current.showModal();
       }
@@ -39,22 +46,16 @@ export default function CardScreen(props) {
       <div id="card-screen">
         <h1 className="bottom-spacing">Welcome</h1>
         <h3>Please enter card number and pin to begin</h3>
-        <ErrorModal errorMessage={error} clearError={clearError} ref={modal} />
+        <Modal message={modalMessage} ref={modal} />
         <form onSubmit={(e) => checkCard(e)}>
           <input
             placeholder="Card Number"
             value={cardNumber}
-            onChange={(e) => setCardNumber(e.target.value)}
+            onChange={handleCardNumber}
           ></input>
 
-          <input
-            placeholder="PIN"
-            value={pin}
-            onChange={(e) => setPin(e.target.value)}
-          ></input>
-          <button type="submit">
-            Next
-          </button>
+          <input placeholder="PIN" value={pin} onChange={handleSetPin}></input>
+          <button type="submit">Next</button>
         </form>
       </div>
     </>

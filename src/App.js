@@ -1,6 +1,6 @@
 import "./styles.css";
 import CardScreen from "./CardScreen.js";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import mockData from "./mockData.json";
 import { CardContext } from "./CardContext.js";
 import {
@@ -31,13 +31,10 @@ export default function App() {
         return <DepositScreen />;
     }
   };
-  useEffect(() => {
-    console.log("CARD DATA", cardData);
-  }, [cardData]);
+
   const updateCardData = (cardNumber, balance, withdrawAmount) => {
     setCardData({ ...cardData, activeCard: cardNumber });
     if (balance) {
-      console.log("HELLO");
       setCardData({
         ...cardData,
         [cardNumber]: { ...cardData[cardNumber], balance: balance },
@@ -48,7 +45,7 @@ export default function App() {
     if (withdrawAmount) {
       setCardData({
         ...cardData,
-        [cardNumber]: { ...cardData[cardNumber], withdrawAmount: withdrawAmount },
+        [cardNumber]: { ...cardData[cardNumber], balance: balance, withdrawAmount: withdrawAmount },
       });
     }
   };
