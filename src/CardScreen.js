@@ -1,49 +1,50 @@
-import { useContext, useEffect, useState, useRef } from "react";
+import { useContext, useState, useRef } from "react";
 import { CardContext } from "./CardContext";
 import ErrorModal from "./ErrorModal";
+import { ScreenContext } from "./ScreenContext";
+import { REQUEST_SCREEN } from "./Statuses";
 
 export default function CardScreen(props) {
   const [cardNumber, setCardNumber] = useState("");
-  const [pin, setPin] = useState();
+  const [pin, setPin] = useState("");
   const { cardData, setCardData } = useContext(CardContext);
+  const { page, setPageHandler } = useContext(ScreenContext);
   const [error, setError] = useState("");
   const modal = useRef(null);
 
   const clearError = () => {
     setError("");
   };
+
   const checkCard = (e) => {
     e.preventDefault();
+    console.log(cardData);
     console.log(cardData);
     if (!(cardNumber in cardData)) {
       setError("Invalid Card Number");
       if (modal.current) {
         modal.current.showModal();
       }
-    } else if (cardData[cardNumber].pin !== pin) {
+    } else if (cardData[cardNumber].pin !== Number(pin)) {
+      console.log("HHELO", cardData[cardNumber].pin);
+      setError("Invalid Pin");
       if (modal.current) {
         modal.current.showModal();
       }
+    } else {
+      console.log("SCREEN", screen);
+      setPageHandler(REQUEST_SCREEN);
     }
   };
-
-  useEffect(() => {
-    console.log(modal.current);
-  }, modal.current);
-  // useEffect(() => {
-  //   console.log(cardNumber);
-  // }, [cardNumber]);
 
   return (
     <>
       <div id="card-screen">
         <h1 className="bottom-spacing">Welcome</h1>
         <h3>Please enter card number and pin to begin</h3>
-        {/* <dialog ref ={modal}>HELLO</dialog> */}
         <ErrorModal errorMessage={error} clearError={clearError} ref={modal} />
         <form onSubmit={(e) => checkCard(e)}>
           <input
-            type="number"
             placeholder="Card Number"
             value={cardNumber}
             onChange={(e) => setCardNumber(e.target.value)}
@@ -51,7 +52,6 @@ export default function CardScreen(props) {
           ></input>
 
           <input
-            type="number"
             placeholder="PIN"
             className="form-sizing"
             value={pin}
