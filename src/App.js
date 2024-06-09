@@ -39,8 +39,6 @@ export default function App() {
         ...cardData,
         [cardNumber]: { ...cardData[cardNumber], balance: balance },
       });
-      console.log(balance);
-      console.log(cardNumber);
     }
     if (withdrawAmount) {
       setCardData({
