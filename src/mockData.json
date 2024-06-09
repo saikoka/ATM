@@ -2,26 +2,31 @@
   "99": {
     "pin": 1234,
     "balance": 500,
-    "limit": 100
+    "limit": 100,
+    "withdrawAmount": 0
   },
   "2345678923456789": {
     "pin": 2345,
     "balance": 48923,
-    "limit": 1000
+    "limit": 1000,
+    "withdrawAmount": 0
   },
   "3456789034567890": {
     "pin": 3456,
     "balance": 98234,
-    "limit": 10000
+    "limit": 10000,
+    "withdrawAmount": 0
   },
   "4567890145678901": {
     "pin": 4567,
     "balance": 22345,
-    "limit": 1000
+    "limit": 1000,
+    "withdrawAmount": 0
   },
   "5678901256789012": {
     "pin": 5678,
     "balance": 54321,
-    "limit": 100
+    "limit": 100,
+    "withdrawAmount": 0
   }
 }

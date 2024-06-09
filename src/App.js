@@ -16,9 +16,9 @@ import DepositScreen from "./DepositScreen.js";
 export default function App() {
   const [cardData, setCardData] = useState(mockData);
   const [page, setPage] = useState(CARD_SCREEN);
-  const setPageHandler = (page) =>{
+  const setPageHandler = (page) => {
     setPage(page);
-  }
+  };
   const screenRender = () => {
     switch (page) {
       case CARD_SCREEN:
@@ -31,14 +31,29 @@ export default function App() {
         return <DepositScreen />;
     }
   };
-  const updateBalance = (cardNumber, balance) => {
-    // if (!(cardNumber in cardData)) {
-    //   return "";
-    // }
-    setCardData(balance);
+  useEffect(() => {
+    console.log("CARD DATA", cardData);
+  }, [cardData]);
+  const updateCardData = (cardNumber, balance, withdrawAmount) => {
+    setCardData({ ...cardData, activeCard: cardNumber });
+    if (balance) {
+      console.log("HELLO");
+      setCardData({
+        ...cardData,
+        [cardNumber]: { ...cardData[cardNumber], balance: balance },
+      });
+      console.log(balance);
+      console.log(cardNumber);
+    }
+    if (withdrawAmount) {
+      setCardData({
+        ...cardData,
+        [cardNumber]: { ...cardData[cardNumber], withdrawAmount: withdrawAmount },
+      });
+    }
   };
   return (
-    <CardContext.Provider value={{ cardData, updateBalance }}>
+    <CardContext.Provider value={{ cardData, updateCardData }}>
       <ScreenContext.Provider value={{ page, setPageHandler }}>
         <div className="App">{screenRender()}</div>
       </ScreenContext.Provider>

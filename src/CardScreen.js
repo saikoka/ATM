@@ -7,8 +7,8 @@ import { REQUEST_SCREEN } from "./Statuses";
 export default function CardScreen(props) {
   const [cardNumber, setCardNumber] = useState("");
   const [pin, setPin] = useState("");
-  const { cardData, setCardData } = useContext(CardContext);
-  const { page, setPageHandler } = useContext(ScreenContext);
+  const { cardData, updateCardData } = useContext(CardContext);
+  const { setPageHandler } = useContext(ScreenContext);
   const [error, setError] = useState("");
   const modal = useRef(null);
 
@@ -18,22 +18,19 @@ export default function CardScreen(props) {
 
   const checkCard = (e) => {
     e.preventDefault();
-    console.log(cardData);
-    console.log(cardData);
     if (!(cardNumber in cardData)) {
       setError("Invalid Card Number");
       if (modal.current) {
         modal.current.showModal();
       }
     } else if (cardData[cardNumber].pin !== Number(pin)) {
-      console.log("HHELO", cardData[cardNumber].pin);
       setError("Invalid Pin");
       if (modal.current) {
         modal.current.showModal();
       }
     } else {
-      console.log("SCREEN", screen);
       setPageHandler(REQUEST_SCREEN);
+      updateCardData(cardNumber);
     }
   };
 
@@ -48,16 +45,14 @@ export default function CardScreen(props) {
             placeholder="Card Number"
             value={cardNumber}
             onChange={(e) => setCardNumber(e.target.value)}
-            className="form-sizing"
           ></input>
 
           <input
             placeholder="PIN"
-            className="form-sizing"
             value={pin}
             onChange={(e) => setPin(e.target.value)}
           ></input>
-          <button type="submit" id="" className="form-sizing">
+          <button type="submit">
             Next
           </button>
         </form>
